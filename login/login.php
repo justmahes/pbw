@@ -1,32 +1,24 @@
 <?php
-session_start();
 require_once '../koneksi.php'; // koneksi
-function readdata($result)
-{
-    $rows = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $rows[] = $row;
-    }
 
-    return $rows;
-}
+// login
 if (isset($_POST['masuk'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $quser = "SELECT * FROM siswa WHERE nisn = '$username'"; // query user
-    $ruser = mysqli_query($conn, $quser); // result user
-    $readUser = readdata($ruser);
+    $petugas = "SELECT * FROM petugas WHERE username = '$username'"; // query user
+    $checkPetugas = mysqli_query($conn, $petugas); // result user
+    $readPetugas = readdata($checkPetugas);
 
-    // cek username
-    if (mysqli_num_rows($ruser) > 0) {
-        $qpass = "SELECT * FROM siswa WHERE password = '$username'"; // query password
-        $rpass = mysqli_query($conn, $qpass); // result password
+    // cek petugas password
+    if (mysqli_num_rows($checkPetugas) > 0) {
+        $ppetugas = "SELECT * FROM petugas WHERE password = '$password'"; // query password
+        $rpetugas = mysqli_query($conn, $ppetugas); // result password
 
         // cek password
-        if (mysqli_num_rows($rpass) > 0) {
+        if (mysqli_num_rows($rpetugas) > 0) {
             $_SESSION['userlogin'] = $username;
-            $_SESSION['leveluser'] = $readUser[0]['leveluser'];
+            $_SESSION['leveluser'] = $readPetugas[0]['level'];
             return header("Location: ../dashboard/index.php");
         }
 

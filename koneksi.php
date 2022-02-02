@@ -1,8 +1,9 @@
 <?php
+session_start();
 $host = 'localhost'; // host
 $username = 'root'; // username
 $password = ''; // password
-$database = 'db_spp'; // nama database
+$database = 'db_spp_rpl2'; // nama database
 $port = null; // port
 $socket = null; // socket
 
@@ -13,3 +14,5 @@ if ($conn->connect_error) {
     echo 'Koneksi gagal';
     exit();
 }
+
+require_once 'functions.php';
