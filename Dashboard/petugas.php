@@ -3,7 +3,7 @@ require_once '../templates/header.php';
 ?>
 
 <div class="content">
-    <h1>Dashboard</h1>
+    <h1>Petugas</h1>
 </div>
 
 <?php
